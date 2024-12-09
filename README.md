@@ -22,3 +22,4 @@ dotnet test
 2. Performance test 
 3. Improve test coverage
    
+[![HitCount](https://hits.dwyl.com/francis04j/francis04j/Cube.svg?style=flat-square)](http://hits.dwyl.com/francis04j/francis04j/Cube)
