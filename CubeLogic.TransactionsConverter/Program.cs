@@ -5,7 +5,9 @@ using CubeLogic.TransactionsConverter.CustomCsvReader;
 using CubeLogic.TransactionsConverter.FileValidators;
 using CubeLogic.TransactionsConverter.Processors;
 using CubeLogic.TransactionsConverter.TimezoneConverter;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 // PLEASE NOTE: the input and config files are always copied into bin directory. This sis a build action
 //CAN UPDATE TO WRITE/READ in Windows special Data folders
@@ -32,10 +34,11 @@ public class Program
         string inputPath = "inputTransactions.csv";
         string outputPath = "output.csv";
 
-        using ILoggerFactory loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-        var logger = loggerFactory.CreateLogger<TransactionProcessor>(); 
-        var configService = new ConfigService(new JsonFileValidator(), new JsonDeserializerWrapper());
-       
+        var host = AppHostStartup.CreateAppHost();
+        
+        var configService = ActivatorUtilities.GetServiceOrCreateInstance<IConfigService>(host.Services);
+        
+        var logger = ActivatorUtilities.GetServiceOrCreateInstance<ILogger<Program>>(host.Services);
         var configResult = configService.LoadConfig(configPath);
         if (configResult.IsFailed)
         {
@@ -44,9 +47,13 @@ public class Program
         }
 
         var config = configResult.Value;
+        
+        //using ILoggerFactory loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+        //var logger = loggerFactory.CreateLogger<TransactionProcessor>(); 
+        
 
         // Process CSV using streaming
-        var transactionProcessor = new TransactionProcessor(new DefaultUtCconverter(), new CsvReaderFactory(), new CsvWriterFactory(), logger);
+        var transactionProcessor = ActivatorUtilities.GetServiceOrCreateInstance<ITransactionProcessor>(host.Services);
         var processResult = transactionProcessor.ProcessTransactions(inputPath, outputPath, config);
         if (processResult.IsFailed)
         {
@@ -54,6 +61,6 @@ public class Program
             return;
         }
 
-        logger.LogInformation("Processing complete. Output saved to " + outputPath);
+        logger.LogInformation("Processing complete. Output saved to {outputPath}", outputPath);
     }
 }
