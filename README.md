@@ -1,5 +1,7 @@
 # Transaction processor
 
+[![.NET](https://github.com/francis04j/Cube/actions/workflows/build-and-unit-test.yml/badge.svg)](https://github.com/francis04j/Cube/actions/workflows/build-and-unit-test.yml)
+
 Hello reviewer, thanks for taking your time to review this code. This code was completed over the weekend. I tried to time it at 4 hours per day.
 The code isnt perfect but i hope it will show you how i structure my code and verify it. 
 I'll appreciate any feedback
