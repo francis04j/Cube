@@ -9,58 +9,51 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
-// PLEASE NOTE: the input and config files are always copied into bin directory. This sis a build action
-//CAN UPDATE TO WRITE/READ in Windows special Data folders
-//https://stackoverflow.com/questions/57638466/how-to-create-text-file-in-net-project-folder-not-in-bin-debug-folder-where-is
-
-/*
- *var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), 
-                                 "log1.txt");
-   using (StreamWriter file = File.AppendText(fileName))
-   {
-       file.WriteLine("Hello from the text file");
-   }
- */
-
 namespace CubeLogic.TransactionsConverter;
 using Microsoft.Extensions.Logging;
+using CommandLine;
 
 public class Program
 {
-    
     static void Main(string[] args)
     {
-        string configPath = "config.json";
-        string inputPath = "inputTransactions.csv";
-        string outputPath = "output.csv";
-
         var host = AppHostStartup.CreateAppHost();
-        
-        var configService = ActivatorUtilities.GetServiceOrCreateInstance<IConfigService>(host.Services);
-        
         var logger = ActivatorUtilities.GetServiceOrCreateInstance<ILogger<Program>>(host.Services);
-        var configResult = configService.LoadConfig(configPath);
-        if (configResult.IsFailed)
-        {
-            logger.LogError(configResult.Errors[0].Message);
-            return;
-        }
 
-        var config = configResult.Value;
+        // Parse arguments and handle options
+        Parser.Default.ParseArguments<Options>(args)
+            .WithParsed(options =>
+            {
+                logger.LogInformation($"Config Path: {options.ConfigPath}");
+                logger.LogInformation($"Input Path: {options.InputPath}");
+                logger.LogInformation($"Output Path: {options.OutputPath}");
+                
+                var configService = ActivatorUtilities.GetServiceOrCreateInstance<IConfigService>(host.Services);
+                var configResult = configService.LoadConfig(options.ConfigPath);
+                if (configResult.IsFailed)
+                {
+                    logger.LogError(configResult.Errors[0].Message);
+                    return;
+                }
+
+                var config = configResult.Value;
+
+                // Process CSV using streaming
+                var transactionProcessor = ActivatorUtilities.GetServiceOrCreateInstance<ITransactionProcessor>(host.Services);
+                var processResult = transactionProcessor.ProcessTransactions(options.InputPath, options.OutputPath, config);
+                if (processResult.IsFailed)
+                {
+                    logger.LogError(processResult.Errors[0].Message);
+                    return;
+                }
+
+                logger.LogInformation("Processing complete. Output saved to {outputPath}", options.OutputPath);
+            })
+            .WithNotParsed(errors =>
+            {
+                logger.LogInformation("Failed to parse arguments. Use --help for usage instructions.");
+            });
+
         
-        //using ILoggerFactory loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-        //var logger = loggerFactory.CreateLogger<TransactionProcessor>(); 
-        
-
-        // Process CSV using streaming
-        var transactionProcessor = ActivatorUtilities.GetServiceOrCreateInstance<ITransactionProcessor>(host.Services);
-        var processResult = transactionProcessor.ProcessTransactions(inputPath, outputPath, config);
-        if (processResult.IsFailed)
-        {
-            logger.LogError(processResult.Errors[0].Message);
-            return;
-        }
-
-        logger.LogInformation("Processing complete. Output saved to {outputPath}", outputPath);
     }
 }

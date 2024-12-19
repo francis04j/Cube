@@ -13,7 +13,7 @@ To build the application, run
 $ dotnet build
 
 To run it
-$dotnet run
+dotnet run --config config.json --input inputTransactions.csv --output output.csv
 
 To run the unit tests
 $cd CubeLogic.TransactionsConverter.UnitTests
