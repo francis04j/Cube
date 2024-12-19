@@ -86,6 +86,19 @@ public class TransactionProcessor
                 if (ShouldSkipRecordingOrderRevision(type, record, lastProcessedPrice, revisionCounters))
                 {
                     continue;
+                }else if (type == "UPDATE")
+                {
+                    lastProcessedPrice[record.OrderId] = record.Price;
+                    revisionCounters[record.OrderId]++;
+                        
+                }
+                else
+                {
+                    var revision = revisionCounters.GetValueOrDefault(record.OrderId);
+                    if (revision == 0)
+                    {
+                        revisionCounters[record.OrderId] = 1;
+                    }
                 }
 
                 var outputTransaction = new OutputTransaction
@@ -127,15 +140,8 @@ public class TransactionProcessor
                 return true;
             }
 
-            lastProcessedPrice[key] = record.Price;
-            revisionCounters[key]++;
         }
 
-        var revision = revisionCounters.GetValueOrDefault(record.OrderId);
-        if (revision == 0)
-        {
-            revisionCounters[record.OrderId] = 1;
-        }
 
         return false;
     }
