@@ -1,21 +1,23 @@
-﻿FROM mcr.microsoft.com/dotnet/runtime:8.0 AS base
+﻿FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+
+# Set the working directory inside the container
+WORKDIR /app
+COPY ["CubeLogic.TransactionsConverter.csproj", "./"]
+RUN dotnet restore
+
+# Copy the entire project directory and build the application
+COPY . ./
+RUN dotnet publish -c Release -o /out /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/runtime:8.0
+
+# Set the working directory for the runtime container
+WORKDIR /app
+
+# Copy the built application from the build stage
+COPY --from=build-env /out ./
+COPY InputTransactions.csv ./
+COPY config.json ./
+
 USER $APP_UID
-WORKDIR /app
-
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY ["CubeLogic.TransactionsConverter/CubeLogic.TransactionsConverter.csproj", "CubeLogic.TransactionsConverter/"]
-RUN dotnet restore "CubeLogic.TransactionsConverter/CubeLogic.TransactionsConverter.csproj"
-COPY . .
-WORKDIR "/src/CubeLogic.TransactionsConverter"
-RUN dotnet build "CubeLogic.TransactionsConverter.csproj" -c $BUILD_CONFIGURATION -o /app/build
-
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "CubeLogic.TransactionsConverter.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "CubeLogic.TransactionsConverter.dll"]
