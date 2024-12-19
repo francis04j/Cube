@@ -33,6 +33,8 @@ public class TransactionProcessorTests
     {
         _faker = new Faker();
         _utCconverter = new();
+        mockCsvReader = new Mock<ICsvReader>();
+        mockCsvWriter = new Mock<ICsvWriter>();
         _csvReaderFactory = new Mock<ICsvReaderFactory>();
         _csvWriterFactory = new Mock<ICsvWriterFactory>();
         SetupCsvReader(_csvReaderFactory);
