@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace CubeLogic.TransactionsConverter.Configuration;
 
-public class ConfigService
+public class ConfigService : IConfigService
 {
     readonly IFileValidator _fileValidator;
     readonly IJsonDeserializer _jsonDeserializer;

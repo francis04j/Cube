@@ -14,7 +14,7 @@ using MissingFieldException = CsvHelper.MissingFieldException;
 
 namespace CubeLogic.TransactionsConverter.Processors;
 
-public class TransactionProcessor
+public class TransactionProcessor : ITransactionProcessor
 {
     readonly IUtCconverter _utCconverter;
     readonly ICsvReaderFactory _csvReaderFactory;
