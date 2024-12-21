@@ -2,7 +2,9 @@ name: Deploy to Azure
 
 on:
   push:
-    branches: [ "main" ] # Trigger on pushes to the 'main' branch
+    branches: ["main", "terraform-deploy"] # Trigger on pushes to the 'main' branch
+  pull_request:
+    branches: ["main"]
 
 jobs:
   build-and-deploy:
@@ -11,13 +13,40 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+        # Log in to Azure Container Registry (ACR)
+      - name: Log in to Azure Container Registry
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.ACR_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+        # Build Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.ACR_SERVER }}/transconv:latest .
+
+        # Run Snyk security scan
+      # - name: Run Snyk Security Scan
+      #   uses: snyk/actions/docker@v2
+      #   with:
+      #     image: ${{ secrets.ACR_SERVER }}/transconv:latest
+      #     args: --severity-threshold=high
+      #     env:
+      #       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+        # Push Docker image to ACR
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.ACR_SERVER }}/transconv:latest
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }} 
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Change working directory
         run: |
@@ -33,7 +62,7 @@ jobs:
 
       - name: Apply
         run: |
-          terraform apply -auto-approve plan 
+          terraform apply -auto-approve plan
 
       - name: Output
         run: |
