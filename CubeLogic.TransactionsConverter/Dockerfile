@@ -2,11 +2,11 @@
 
 # Set the working directory inside the container
 WORKDIR /app
-COPY ["CubeLogic.TransactionsConverter.csproj", "./"]
+COPY ["CubeLogic.TransactionsConverter/CubeLogic.TransactionsConverter.csproj", "./"]
 RUN dotnet restore
 
 # Copy the entire project directory and build the application
-COPY . ./
+COPY CubeLogic.TransactionsConverter/ ./
 RUN dotnet publish -c Release -o /out /p:UseAppHost=false
 
 FROM mcr.microsoft.com/dotnet/runtime:8.0
@@ -19,9 +19,6 @@ RUN useradd -m -u 1000 appuser
 
 # Switch to the new user
 USER appuser
-
-# Check permissions for the app user (optional)
-RUN ls -l /app && echo "Permissions for /app:"
 
 # Create empty volumes for each argument path
 VOLUME ["--mode=0755", "/app/input_file_path"] 

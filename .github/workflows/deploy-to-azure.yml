@@ -24,7 +24,7 @@ jobs:
         # Build Docker image
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.ACR_SERVER }}/transconv:latest .
+          docker build -f CubeLogic.TransactionsConverter/Dockerfile -t ${{ secrets.ACR_SERVER }}/transconv:latest .
 
         # Run Snyk security scan
       # - name: Run Snyk Security Scan
