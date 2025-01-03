@@ -12,7 +12,7 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;
   &lt;Assembly Path="/Users/francisadediran/.nuget/packages/csvhelper/33.0.1/lib/net8.0/CsvHelper.dll" /&gt;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=69c60df5_002D2543_002D4753_002Daab9_002D0ed140325363/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ProcessTransactions_ShouldUseUtcConverter_WhenRecordHasDateTimeAndTimezone" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=69c60df5_002D2543_002D4753_002Daab9_002D0ed140325363/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ProcessTransactions_ShouldUseUtcConverter_WhenRecordHasDateTimeAndTimezone" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::5D54FCEC-8CDB-48E8-8ACA-6F1D7DD49C50::net8.0::CubeLogic.TransactionsConverter.UnitTests.Processors.TransactionProcessorTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::5D54FCEC-8CDB-48E8-8ACA-6F1D7DD49C50::net8.0::CubeLogic.TransactionsConverter.UnitTests.TimezoneConverter.DefaultUtCconverterTests&lt;/TestId&gt;
@@ -24,15 +24,6 @@
     &lt;TestId&gt;xUnit::5D54FCEC-8CDB-48E8-8ACA-6F1D7DD49C50::net8.0::CubeLogic.TransactionsConverter.UnitTests.Configuration.ConfigServiceTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a255abae_002D8217_002D403f_002D8b0a_002D704f6ad4ca15/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TransactionProcessorTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::5D54FCEC-8CDB-48E8-8ACA-6F1D7DD49C50::net8.0::CubeLogic.TransactionsConverter.UnitTests.Processors.TransactionProcessorTests.ProcessTransactions_ShouldReturnError_WhenInputFilePathIsEmpty&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::5D54FCEC-8CDB-48E8-8ACA-6F1D7DD49C50::net8.0::CubeLogic.TransactionsConverter.UnitTests.Processors.TransactionProcessorTests.ProcessTransactions_ShouldReturnError_WhenOutputFilePathIsEmpty&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::5D54FCEC-8CDB-48E8-8ACA-6F1D7DD49C50::net8.0::CubeLogic.TransactionsConverter.UnitTests.Processors.TransactionProcessorTests.ProcessTransactions_ShouldReturnError_WhenInputFilePathIsNull&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::5D54FCEC-8CDB-48E8-8ACA-6F1D7DD49C50::net8.0::CubeLogic.TransactionsConverter.UnitTests.Processors.TransactionProcessorTests.ProcessTransactions_ShouldReturnError_WhenThereIsNoTimezoneInConfig&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::5D54FCEC-8CDB-48E8-8ACA-6F1D7DD49C50::net8.0::CubeLogic.TransactionsConverter.UnitTests.TimezoneConverter.DefaultUtCconverterTests.Convert_ShouldReturnErrorWhenDateTimeIsInvalid&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::5D54FCEC-8CDB-48E8-8ACA-6F1D7DD49C50::net8.0::CubeLogic.TransactionsConverter.UnitTests.TimezoneConverter.DefaultUtCconverterTests&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::5D54FCEC-8CDB-48E8-8ACA-6F1D7DD49C50::net8.0::CubeLogic.TransactionsConverter.UnitTests.Processors.TransactionProcessorTests.ProcessTransactions_ShouldUseUtcConverter_WhenRecordHasDateTimeAndTimezone&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::5D54FCEC-8CDB-48E8-8ACA-6F1D7DD49C50::net8.0::CubeLogic.TransactionsConverter.UnitTests.Processors.TransactionProcessorTests&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a255abae_002D8217_002D403f_002D8b0a_002D704f6ad4ca15/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TransactionProcessorTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Solution /&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

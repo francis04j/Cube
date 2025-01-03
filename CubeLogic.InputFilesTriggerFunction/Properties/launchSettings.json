@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "CubeLogic.InputFilesTriggerFunction": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7128",
+      "launchBrowser": false
+    }
+  }
+}

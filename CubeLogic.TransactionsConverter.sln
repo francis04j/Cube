@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CubeLogic.TransactionsConve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CubeLogic.TransactionsConverter.UnitTests", "CubeLogic.TransactionsConverter.UnitTests\CubeLogic.TransactionsConverter.UnitTests.csproj", "{5D54FCEC-8CDB-48E8-8ACA-6F1D7DD49C50}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CubeLogic.InputFilesTriggerFunction", "CubeLogic.InputFilesTriggerFunction\CubeLogic.InputFilesTriggerFunction.csproj", "{E6060DCB-6408-496C-98DD-5882895BDFEF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{5D54FCEC-8CDB-48E8-8ACA-6F1D7DD49C50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D54FCEC-8CDB-48E8-8ACA-6F1D7DD49C50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D54FCEC-8CDB-48E8-8ACA-6F1D7DD49C50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6060DCB-6408-496C-98DD-5882895BDFEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6060DCB-6408-496C-98DD-5882895BDFEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6060DCB-6408-496C-98DD-5882895BDFEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6060DCB-6408-496C-98DD-5882895BDFEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
