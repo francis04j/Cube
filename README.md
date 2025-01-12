@@ -2,9 +2,6 @@
 
 [![Build and unit tests](https://github.com/francis04j/Cube/actions/workflows/build-and-unit-test.yml/badge.svg)](https://github.com/francis04j/Cube/actions/workflows/build-and-unit-test.yml)
 
-Hello reviewer, thanks for taking your time to review this code. This code was completed over the weekend. I tried to time it at 4 hours per day.
-The code isnt perfect but i hope it will show you how i structure my code and verify it. 
-I'll appreciate any feedback
 
 ## How to use
 This project uses .NET 8. Please make sure you have .NET 8 installed
@@ -34,10 +31,6 @@ To build and run this application using Docker, do the following
 // Second, -v $(pwd)/config.json:/app/config.json
 // Third, -v $(pwd)/output:/app/output
 
-## Future updates
-###1.Performance profiling
-###2.Integration tests
-###3.Deployment into Cloud (Azure)
-###4. Improve test coverage
+
    
 [![HitCount](https://hits.dwyl.com/francis04j/francis04j/Cube.svg?style=flat-square)](http://hits.dwyl.com/francis04j/francis04j/Cube)
